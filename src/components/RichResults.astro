@@ -1,0 +1,108 @@
+---
+const projectSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'CatchTheAlien',
+  url: 'https://www.catchthealien.com',
+  description:
+    'CatchTheAlien is a real-world exploration game where hidden 3D printed aliens are placed across cities. Find them, track them, and be part of the hunt.',
+  inLanguage: 'en',
+  creator: {
+    '@type': 'Person',
+    name: 'Aitor Rey',
+  },
+};
+
+const gameSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Game',
+  name: 'CatchTheAlien',
+  description:
+    'A real-world alien hunting experience. Explore your city, find hidden aliens, and track discoveries on an interactive map.',
+  genre: ['Exploration', 'Urban Game', 'Collecting'],
+  gamePlatform: 'Web',
+  numberOfPlayers: {
+    '@type': 'QuantitativeValue',
+    minValue: 1,
+  },
+  author: {
+    '@type': 'Person',
+    name: 'Aitor Rey',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://www.catchthealien.com',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Map',
+      item: 'https://www.catchthealien.com/map',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Aliens',
+      item: 'https://www.catchthealien.com/aliens',
+    },
+    {
+      '@type': 'ListItem',
+      position: 4,
+      name: 'About',
+      item: 'https://www.catchthealien.com/about',
+    },
+  ],
+};
+
+// FAQs más alineadas con el proyecto
+const FAQs = [
+  {
+    question: 'What is CatchTheAlien?',
+    answer:
+      'CatchTheAlien is a real-world game where small 3D printed aliens are hidden across cities for people to find.',
+  },
+  {
+    question: 'How do I find aliens?',
+    answer:
+      'Use the interactive map to explore locations where aliens have been hidden or discovered.',
+  },
+  {
+    question: 'Can I keep the alien if I find one?',
+    answer: "Yes. If you find one, it's yours. But don't forget to report it on the map.",
+  },
+  {
+    question: 'Will there be more aliens?',
+    answer: 'Yes. New aliens are constantly being placed in different locations.',
+  },
+  {
+    question: 'Is this available outside Spain?',
+    answer: 'The project started in Spain but is designed to expand worldwide.',
+  },
+];
+
+const FAQSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQs.map(({ answer, question }) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: answer,
+    },
+  })),
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(projectSchema)} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify(gameSchema)} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify(FAQSchema)} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />

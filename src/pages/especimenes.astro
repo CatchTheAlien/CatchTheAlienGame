@@ -1,0 +1,54 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/Navbar.astro';
+import { ALIEN_TYPES } from '@/data/alien_types';
+---
+
+<Layout
+  title="Especímenes | CatchTheAlien"
+  description="Descubre todos los tipos de aliens disponibles en CatchTheAlien. Cada especimen tiene características únicas."
+  canonical={`${import.meta.env.SITE || import.meta.env.PUBLIC_SITE_URL || 'https://catchthealien.example'}/especimenes`}
+  image="/imgs/aliens/realimages/create-alien.jpg"
+  openGraph={{
+    title: 'Especímenes - Catch The Alien',
+    type: 'website',
+    description: 'Explora todos los tipos de aliens disponibles en el juego.',
+  }}
+>
+  <Navbar />
+
+  <!-- ESPECÍMENES -->
+  <section class="bg-bg-secondary h-screen px-6 py-20">
+    <div class="mx-auto max-w-6xl">
+      <div class="mb-12 text-center">
+        <h2 class="text-text-primary text-2xl font-semibold tracking-tight">Tipos disponibles</h2>
+        <p class="text-text-muted mt-1 text-sm">
+          {ALIEN_TYPES.length} especímenes catalogados
+        </p>
+      </div>
+
+      <!-- Grid de especímenes -->
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {
+          ALIEN_TYPES.map((type) => (
+            <div class="group bg-bg-primary overflow-hidden rounded-xl border border-(--color-border) transition-all hover:border-accent-soft hover:shadow-lg">
+              <a class="relative aspect-square overflow-hidden bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px]" href={type.modelUrl}        target="_blank"
+          rel="noopener noreferrer">
+                <img
+                  src={`/imgs/aliens/${type.folder}/0005.webp`}
+                  alt={`Alien tipo ${type.name}`}
+                  class="h-full w-full object-cover transition-transform group-hover:scale-105"
+                  loading="lazy"
+                />
+              </a>
+
+              <div class="p-4">
+                <h3 class="text-text-primary text-lg font-semibold">{type.name}</h3>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

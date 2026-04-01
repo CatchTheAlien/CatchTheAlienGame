@@ -1,0 +1,67 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Instagram from '@/components/icons/Instagram.astro';
+import Tiktok from '@/components/icons/Tiktok.astro';
+import Discord from '@/components/icons/Discord.astro';
+import MakerWorld from '@/components/icons/Makerwrold.astro';
+---
+
+<Layout
+  title="Encuéntranos | CatchTheAlien"
+  description="Accede a las redes y recursos de Catch The Alien para seguir la comunidad en tiempo real."
+  canonical={`${import.meta.env.SITE || import.meta.env.PUBLIC_SITE_URL || 'https://catchthealien.example'}/FindMe`}
+  image="/imgs/aliens/realimages/findme.jpg"
+  openGraph={{
+    title: 'Encuéntranos - Catch The Alien',
+    type: 'website',
+    description: 'Enlaces a Instagram, TikTok, Discord y MakerWorld de Catch The Alien.',
+  }}
+>
+  <section class="bg-bg-primary min-h-screen px-6 py-4">
+    <div class="mx-auto max-w-4xl">
+      <div class="mb-6 text-center">
+        <h1 class="text-text-primary text-3xl font-semibold tracking-tight">Encuéntranos</h1>
+      </div>
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <!-- Página Principal -->
+        <a
+          href="/"
+          class="bg-bg-secondary flex min-h-30 flex-col items-center justify-center rounded-xl border border-(--color-border) p-4 text-center transition-colors duration-150 hover:bg-(--color-bg-tertiary) md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2"
+        >
+          <h2 class="text-text-primary mb-2 text-xl font-semibold">Catch The Alien</h2>
+          <p class="text-text-secondary text-sm">Explora tu ciudad en busca de aliens</p>
+        </a>
+        <!-- Instagram -->
+        <a
+          href="https://www.instagram.com/catchthealiengame/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-bg-secondary flex min-h-30 flex-row items-center justify-center gap-2 rounded-xl border border-(--color-border) p-4 transition-colors duration-150 hover:bg-(--color-bg-tertiary) md:flex-col md:justify-center"
+        >
+          <Instagram class="fill-accent-primary mx-2 h-8 w-8 shrink-0" />
+          <span class="text-accent-primary text-sm font-medium">Instagram</span>
+        </a>
+        <!-- TikTok -->
+        <a
+          href="https://www.tiktok.com/@catchthealien"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-bg-secondary flex min-h-30 flex-row items-center justify-center gap-2 rounded-xl border border-(--color-border) p-4 transition-colors duration-150 hover:bg-(--color-bg-tertiary) md:flex-col md:justify-center"
+        >
+          <Tiktok class="fill-accent-primary mx-2 h-8 w-8 shrink-0" />
+          <span class="text-accent-primary text-sm font-medium">TikTok</span>
+        </a>
+        <!-- MakerWorld -->
+        <a
+          href="https://makerworld.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-bg-secondary flex min-h-30 flex-row items-center justify-center gap-2 rounded-xl border border-(--color-border) p-4 transition-colors duration-150 hover:bg-(--color-bg-tertiary) md:flex-col md:justify-center"
+        >
+          <MakerWorld class="fill-accent-primary mx-2 h-8 w-8 shrink-0" />
+          <span class="text-accent-primary text-sm font-medium">MakerWorld</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

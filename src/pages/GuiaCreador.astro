@@ -1,0 +1,219 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/Navbar.astro';
+---
+
+<Layout
+  title="Guía para Creadores — CatchTheAlien"
+  description="Aprende cómo crear y esconder tus propios aliens en Catch The Alien. Guía completa para diseñar, imprimir y activar aliens en el mundo real."
+  canonical={`${import.meta.env.SITE || import.meta.env.PUBLIC_SITE_URL || 'https://catchthealien.example'}/GuiaCreador`}
+  image="/imgs/aliens/realimages/sample.jpg"
+  openGraph={{
+    title: 'Guía para Creadores — CatchTheAlien',
+    type: 'website',
+    description:
+      'Descubre cómo participar como creador en Catch The Alien: diseña, imprime y esconde aliens para que otros los encuentren.',
+  }}
+>
+  <Navbar />
+
+  <section class="bg-bg-primary min-h-screen px-4 py-16">
+    <div class="mx-auto max-w-3xl">
+      <!-- Header -->
+      <section class="mb-10 flex flex-col items-center">
+        <h1 class="text-text-primary text-3xl font-semibold tracking-tight">Guía para Creadores</h1>
+        <p class="text-text-muted mt-1 text-sm">Crea, imprime y esconde aliens en el mundo real.</p>
+      </section>
+
+      <!-- Introducción -->
+      <section class="mb-12">
+        <div class="text-text-secondary space-y-5 text-sm leading-relaxed">
+          <p>
+            CatchTheAlien es un proyecto abierto donde cualquier persona puede diseñar, imprimir y
+            esconder sus propios aliens en el mundo real para que otros los encuentren.
+          </p>
+        </div>
+      </section>
+
+      <hr class="border-accent-soft my-8 border-t" />
+
+      <!-- Cómo crear tu alien -->
+      <section class="mb-12">
+        <div class="bg-bg-secondary overflow-hidden rounded-xl border border-(--color-border)">
+          <div class="px-3 py-3 text-center">
+            <h3>Pasos para crear un alien</h3>
+          </div>
+          {
+            [
+              { step: '01', text: 'Diseña o consigue un modelo 3D' },
+              { step: '02', text: 'Imprime la pieza del alien' },
+              { step: '03', text: 'Genera un QR desde la web' },
+              { step: '04', text: 'Pega el QR en la pieza' },
+              { step: '05', text: 'Escóndelo en tu ciudad' },
+              { step: '06', text: 'Actívalo desde su enlace' },
+            ].map((item) => (
+              <div class="flex items-center gap-5 border-b border-(--color-border) px-6 py-5 transition-colors duration-100 last:border-0 hover:bg-(--color-bg-tertiary)">
+                <span class="text-accent-soft shrink-0 font-mono text-sm font-medium">
+                  {item.step}
+                </span>
+                <span class="text-text-secondary text-sm">{item.text}</span>
+              </div>
+            ))
+          }
+        </div>
+        <img
+          src="/imgs/Pasos.webp"
+          alt="Ejemplo de alien físico"
+          class="mt-6 rounded-lg shadow-md"
+        />
+      </section>
+
+      <hr class="border-accent-soft my-8 border-t" />
+
+      <!-- Requisitos físicos -->
+      <section class="mb-12 flex flex-col items-center gap-6 md:flex-row">
+        <div
+          class="flex-1 space-y-2 overflow-hidden rounded-xl border border-(--color-border) bg-(--color-bg-tertiary) px-6 py-6 text-center"
+        >
+          <ul class="text-text-secondary list-none space-y-2 text-sm">
+            <li>
+              <span class="text-(--color-accent-primary)">✓</span> Entre <strong>3 cm y 5 cm</strong
+              >
+            </li>
+            <li>
+              <span class="text-(--color-accent-primary)">✓</span>
+              <strong>Resistente</strong>
+            </li>
+            <li>
+              <span class="text-(--color-accent-primary)">✓</span>
+              <strong>QR visible</strong>
+            </li>
+            <li>
+              <span class="text-(--color-accent-primary)">✓</span>
+              <strong>Cualquier forma</strong>
+            </li>
+            <li>
+              <span class="text-(--color-accent-primary)">✓</span>
+              <strong>Cualquier color</strong>
+            </li>
+          </ul>
+          <ul class="text-text-secondary mt-4 list-none space-y-2 text-sm">
+            <li><span class="text-(--color-accent-primary)">✗</span> Piezas frágiles</li>
+            <li><span class="text-(--color-accent-primary)">✗</span> Materiales peligrosos</li>
+          </ul>
+        </div>
+        <div class="shrink-0">
+          <img
+            src="/imgs/Size.webp"
+            alt="Tamaño recomendado para aliens"
+            class="h-64 w-full max-w-sm rounded-lg shadow-md md:w-auto"
+          />
+        </div>
+      </section>
+
+      <hr class="border-accent-soft my-8 border-t" />
+
+      <!-- Comunidad abierta -->
+      <section class="mb-12">
+        <div class="mb-10 text-center">
+          <h2 class="text-text-primary text-2xl font-semibold tracking-tight">
+            Un proyecto abierto
+          </h2>
+        </div>
+        <div class="bg-bg-secondary overflow-hidden rounded-xl border border-(--color-border)">
+          <div class="bg-bg-tertiary border-b border-(--color-border) px-5 py-3">
+            <ul
+              class="text-text-secondary list-inside list-disc space-y-2 marker:text-lg marker:text-(--color-accent-primary)"
+            >
+              <li>Permite compartir tus modelos</li>
+              <li>Otros creadores pueden reutilizarlos</li>
+              <li>Facilita la impresión</li>
+              <li>
+                La descripción del modelo debe incluir <strong class="text-(--color-accent-primary)"
+                  >#CatchTheAlien</strong
+                >
+              </li>
+            </ul>
+            <div class="border-t border-(--color-border) px-6 py-4">
+              <a
+                href="https://makerworld.com/es/collections/23808625-catch-the-alien"
+                class="border-accent-soft text-accent-secondary hover:border-accent-soft inline-block rounded-lg border px-5 py-2.5 text-sm transition-colors duration-150 hover:text-(--color-accent-primary)"
+              >
+                Colección de modelos 3D
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <hr class="border-accent-soft my-8 border-t" />
+
+        <!-- Buenas Prácticas -->
+        <section class="mb-12">
+          <div class="bg-bg-secondary overflow-hidden rounded-xl border border-(--color-border)">
+            <div class="px-3 py-3 text-center">
+              <h3>Buenas prácticas</h3>
+            </div>
+            {
+              [
+                { step: '✓', text: 'Esconde aliens en lugares accesibles' },
+                { step: '✓', text: 'Respeta el entorno' },
+                { step: '⊘', text: 'Evita sitios peligrosos o privados' },
+                { step: '⊘', text: 'No dañes espacios públicos' },
+              ].map((item) => (
+                <div class="flex items-center gap-5 border-b border-(--color-border) px-6 py-5 transition-colors duration-100 last:border-0 hover:bg-(--color-bg-tertiary)">
+                  <span class="text-accent-soft shrink-0 font-mono text-sm font-medium">
+                    {item.step}
+                  </span>
+                  <span class="text-text-secondary text-sm">{item.text}</span>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <hr class="border-accent-soft my-8 border-t" />
+
+        <!-- Empieza ahora -->
+        <section class="mb-12">
+          <div
+            class="text-text-secondary flex flex-col items-center space-y-5 text-center text-sm leading-relaxed"
+          >
+            <h2>¿Listo para crear tu primer alien?</h2>
+            <a
+              href="/create-alien"
+              class="text-accent-secondary hover:border-accent-soft inline-block rounded-lg border border-(--color-border) px-5 py-2.5 text-lg transition-colors duration-150 hover:text-(--color-accent-primary)"
+            >
+              Crea tu propio alien
+            </a>
+          </div>
+          <hr class="border-accent-soft my-8 border-t" />
+
+          <!-- Moderación -->
+          <section class="mb-12">
+            <div
+              class="bg-bg-secondary text-text-muted space-y-5 overflow-hidden rounded-xl border border-(--color-border) p-6 text-sm leading-relaxed"
+            >
+              <p>CatchTheAlien se reserva el derecho de:</p>
+              <ul class="list-inside list-disc space-y-2">
+                <li>Eliminar aliens que incumplan las normas</li>
+                <li>Bloquear a usuarios que hagan un uso indebido</li>
+              </ul>
+              <p>El objetivo es mantener una comunidad sana y creativa.</p>
+            </div>
+          </section>
+
+          <hr class="border-accent-soft my-8 border-t" />
+
+          <!-- Footer -->
+          <footer
+            class="mt-16 flex items-center justify-between border-t border-(--color-border) pt-6 opacity-40"
+          >
+            <span class="text-text-muted font-mono text-[10px] tracking-widest uppercase">
+              2026 / A community project by CatchTheAlien
+            </span>
+          </footer>
+        </section>
+      </section>
+    </div>
+  </section></Layout
+>

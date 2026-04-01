@@ -1,0 +1,57 @@
+@import 'tailwindcss';
+
+body {
+  margin: 0;
+  padding: 0;
+}
+#map {
+  height: 100vh;
+  width: 100vw;
+}
+
+.invisible-marker.claimed img {
+  filter: grayscale(100%) opacity(0.8);
+}
+
+@theme {
+  --color-primary: #3ddc97; /* verde alien */
+  --color-secondary: #3ddc97; /* hover / activo */
+  /* =========================
+     🌌 BACKGROUND (fondos)
+  ========================= */
+  --color-bg-primary: #0b0f0c; /* fondo principal */
+  --color-bg-secondary: #111615; /* secciones */
+  --color-bg-tertiary: #1f2a27; /* cards / elementos */
+
+  /* =========================
+     📝 TEXT (texto)
+  ========================= */
+  --color-text-primary: #e8f0ec; /* texto principal */
+  --color-text-secondary: #9aa8a3; /* texto secundario */
+  --color-text-muted: #6b7c75; /* texto menos importante */
+
+  /* =========================
+     👽 ACCENT (verde alien)
+  ========================= */
+  --color-accent-primary: #6bffb0; /* verde principal */
+  --color-accent-secondary: #3ddc97; /* hover / activo */
+  --color-accent-soft: #2aa876; /* versión más apagada */
+
+  /* =========================
+     ⚡ UI STATES
+  ========================= */
+  --color-hover: #3ddc97;
+  --color-active: #6bffb0;
+  --color-border: #1f2a27;
+
+  /* =========================
+     🌫️ EFFECTS
+  ========================= */
+  --color-glow: rgba(107, 255, 176, 0.25); /* glow suave */
+  --color-overlay: rgba(11, 15, 12, 0.7); /* overlays */
+
+  /* =========================
+     🟢 LEGACY (por si usabas esto)
+  ========================= */
+  --color-theme-gray: #def3e7;
+}

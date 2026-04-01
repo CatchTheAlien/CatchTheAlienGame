@@ -1,0 +1,173 @@
+---
+import Tiktok from './icons/Tiktok.astro';
+import Instagram from './icons/Instagram.astro';
+import Discord from './icons/Discord.astro';
+---
+
+<nav
+  class="bg-bg-secondary text-text-primary fixed top-2.5 right-5 left-5 z-1000 flex h-15 items-center justify-between rounded-2xl px-5 shadow-md backdrop-blur"
+>
+  <!-- Logo -->
+  <a href="/" class="text-text-primary flex items-center gap-2 text-lg font-bold hover:opacity-90">
+    <img src="/svg/favicon.svg" alt="Favicon" class="h-10" />
+    <span
+      class="text-accent-primary hover:text-accent-secondary font-mono font-bold"
+      style="font-family:'Space Mono', monospace">Catch The Alien</span
+    >
+  </a>
+
+  <!-- Navegación escritorio -->
+  <div class="hidden items-center gap-6 text-sm font-medium lg:flex">
+    <a href="/map" class="text-accent-primary hover:text-accent-secondary font-bold">Mapa</a>
+    <a href="/especimenes" class="text-accent-primary hover:text-accent-secondary font-bold"
+      >Especímenes</a
+    >
+    <a href="/leaderboard" class="text-accent-primary hover:text-accent-secondary font-bold"
+      >Clasificación</a
+    >
+    <a href="/about" class="text-accent-primary hover:text-accent-secondary font-bold"
+      >El Proyecto</a
+    >
+  </div>
+
+  <!-- Redes sociales escritorio -->
+  <div class="hidden items-center gap-4 lg:flex">
+    <a
+      href="https://www.tiktok.com/@catchthealien"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:bg-primaryHover rounded-full p-2 text-sm text-white focus:ring-4"
+      aria-label="Tiktok"
+    >
+      <Tiktok class="fill-accent-primary hover:fill-accent-secondary size-6" />
+    </a>
+    <a
+      href="https://www.instagram.com/catchthealiengame/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:bg-primaryHover rounded-full p-2 text-sm text-white focus:ring-4"
+      aria-label="Instagram"
+    >
+      <Instagram class="fill-accent-primary hover:fill-accent-secondary size-6" />
+    </a>
+  </div>
+
+  <!-- Botón menu móvil -->
+  <button
+    id="mobile-menu-toggle"
+    aria-label="Abrir menu"
+    class="border-accent-soft fill-accent-primary hover:fill-accent-secondary rounded-lg border p-2 lg:hidden"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="var(--color-accent-primary)"
+      stroke-width="2"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </button>
+</nav>
+
+<!-- Overlay + menu móvil -->
+<div
+  id="mobile-menu-overlay"
+  class="fixed inset-0 z-900 hidden bg-black/50 backdrop-blur-sm"
+  aria-hidden="true"
+>
+</div>
+
+<aside
+  id="mobile-menu"
+  class="bg-bg-secondary fixed top-0 right-0 z-1000 h-screen w-80 max-w-xs translate-x-full transform px-4 py-5 shadow-xl transition-transform duration-300 ease-out"
+  aria-label="Menu de navegación móvil"
+>
+  <div class="mb-6 flex items-center justify-between">
+    <span class="text-accent-soft text-lg font-bold">Menú</span>
+    <button
+      id="mobile-menu-close"
+      aria-label="Cerrar menu"
+      class="rounded-md p-2 hover:bg-gray-700"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="var(--color-accent-primary)"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="flex flex-col gap-4 text-base font-medium">
+    <a href="/map" class="text-accent-primary block rounded-lg px-3 py-2 hover:bg-gray-700">Mapa</a>
+    <a href="/especimenes" class="text-accent-primary block rounded-lg px-3 py-2 hover:bg-gray-700"
+      >Especímenes</a
+    >
+    <a href="/leaderboard" class="text-accent-primary block rounded-lg px-3 py-2 hover:bg-gray-700"
+      >Clasificación</a
+    >
+    <a href="/about" class="text-accent-primary block rounded-lg px-3 py-2 hover:bg-gray-700"
+      >El Proyecto</a
+    >
+  </nav>
+
+  <div class="mt-8 flex items-center gap-3">
+    <a
+      href="https://www.tiktok.com/@catchthealien"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:bg-primaryHover rounded-full p-2 text-white"
+      aria-label="Tiktok"
+    >
+      <Tiktok class="fill-accent-primary hover:fill-accent-secondary size-6" />
+    </a>
+    <a
+      href="https://www.instagram.com/catchthealiengame/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:bg-primaryHover rounded-full p-2 text-white"
+      aria-label="Instagram"
+    >
+      <Instagram class="fill-accent-primary hover:fill-accent-secondary size-6" />
+    </a>
+  </div>
+</aside>
+
+<script>
+  const menuToggle = document.getElementById('mobile-menu-toggle');
+  const menuClose = document.getElementById('mobile-menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('mobile-menu-overlay');
+
+  function openMobileMenu() {
+    if (!mobileMenu || !overlay) return;
+    mobileMenu.classList.remove('translate-x-full');
+    mobileMenu.classList.add('translate-x-0');
+    overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileMenu() {
+    if (!mobileMenu || !overlay) return;
+    mobileMenu.classList.remove('translate-x-0');
+    mobileMenu.classList.add('translate-x-full');
+    overlay.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  menuToggle?.addEventListener('click', openMobileMenu);
+  menuClose?.addEventListener('click', closeMobileMenu);
+  overlay?.addEventListener('click', closeMobileMenu);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMobileMenu();
+    }
+  });
+</script>

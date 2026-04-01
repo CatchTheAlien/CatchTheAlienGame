@@ -1,0 +1,100 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/Navbar.astro';
+---
+
+<Layout
+  title="Sobre Catch The Alien | CatchTheAlien"
+  description="Información del proyecto y la comunidad detrás de Catch The Alien."
+  canonical={`${import.meta.env.SITE || import.meta.env.PUBLIC_SITE_URL || 'https://catchthealien.example'}/about`}
+  image="/imgs/aliens/realimages/about.jpg"
+  openGraph={{
+    title: 'Sobre Catch The Alien',
+    type: 'website',
+    description: 'Descubre la comunidad y objetivos del proyecto Catch The Alien.',
+  }}
+>
+  <Navbar />
+
+  <section class="bg-bg-primary min-h-screen px-4 py-16">
+    <div class="mx-auto max-w-3xl">
+      <!-- Header -->
+      <div class="mb-10">
+        <h1 class="text-text-primary text-3xl font-semibold tracking-tight">Catch The Alien</h1>
+        <p class="text-text-muted mt-1 text-sm">
+          Un proyecto abierto. Una comunidad en movimiento.
+        </p>
+      </div>
+
+      <!-- Body text -->
+      <div class="text-text-secondary space-y-5 text-sm leading-relaxed">
+        <p>
+          Catch The Alien es un proyecto abierto donde pequeñas figuras de aliens impresas en 3D se
+          esconden por la ciudad para ser encontradas. Cada pieza es única, diseñada para integrarse
+          en el entorno y sorprender a quien la descubra.
+        </p>
+        <p>
+          Pero esto no es solo un juego. Es una invitación a explorar. A mirar tu ciudad con otros
+          ojos, a descubrir rincones que normalmente pasarían desapercibidos. Cada alien es una
+          excusa para salir, moverse y redescubrir el entorno.
+        </p>
+        <p>
+          El proyecto está pensado para crecer como una comunidad. Cualquier creador puede diseñar
+          sus propios aliens, imprimirlos y esconderlos para que otros los encuentren. Cuantos más
+          participen, más grande y vivo se vuelve el mundo de Catch The Alien.
+        </p>
+        <p>
+          Todos los modelos deben ser accesibles públicamente a través de repositorios de impresión
+          3D como <a
+            class="hover:text-accent-soft font-semibold text-(--color-accent-primary)"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://makerworld.com/es/collections/23808625-catch-the-alien">MakerWorld</a
+          >, permitiendo que cualquier persona pueda descargarlos, imprimirlos y formar parte del
+          juego.
+        </p>
+        <p>
+          La idea es simple: crear, esconder, encontrar… y volver a empezar. Un ecosistema donde
+          jugadores y creadores construyen juntos una experiencia compartida.
+        </p>
+      </div>
+
+      <!-- Rules -->
+      <div class="bg-bg-secondary mt-12 overflow-hidden rounded-xl border border-(--color-border)">
+        <div class="border-b border-(--color-border) bg-(--color-bg-tertiary) px-5 py-3">
+          <h3
+            class="font-mono text-[10px] font-medium tracking-widest text-(--color-accent-primary) uppercase"
+          >
+            Reglas del juego
+          </h3>
+        </div>
+        <ul class="divide-y divide-[var(--color-border)]">
+          {
+            [
+              'El primero que lo encuentra, se lo queda. Sé respetuoso.',
+              'Si encuentras uno, repórtalo para mantener vivo el mapa.',
+              'No pongas en riesgo tu seguridad para encontrar un alien.',
+              'Si creas uno, compártelo para que otros puedan imprimirlo.',
+            ].map((rule, i) => (
+              <li class="flex items-center gap-4 px-5 py-4 transition-colors duration-100 hover:bg-(--color-bg-tertiary)">
+                <span class="text-accent-soft font-mono text-xs">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span class="text-text-secondary text-sm">{rule}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Footer -->
+      <footer
+        class="mt-16 flex items-center justify-between border-t border-(--color-border) pt-6 opacity-40"
+      >
+        <span class="text-text-muted font-mono text-[10px] tracking-widest uppercase">
+          2026 / A community project by CatchTheAlien
+        </span>
+      </footer>
+    </div>
+  </section>
+</Layout>

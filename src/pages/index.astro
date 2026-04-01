@@ -1,0 +1,215 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/Navbar.astro';
+import AlienCard from '@/components/AlienCard.astro';
+import MapEmbed from '@/components/MapEmbed.astro';
+import { getFoundCount, getTotalFoundCount } from '@/lib/db';
+
+const foundCount = await getFoundCount();
+const totalCount = await getTotalFoundCount();
+---
+
+<Layout
+  title="Catch The Alien | Explora y reclama aliens"
+  description="Plataforma para esconder y encontrar aliens en el mundo real. Únete a la comunidad y gana puntos al reclamar aliens."
+  canonical={`${import.meta.env.SITE || import.meta.env.PUBLIC_SITE_URL || 'https://catchthealien.example'}`}
+  image="/imgs/aliens/realimages/sample.jpg"
+  openGraph={{
+    title: 'Catch The Alien - Inicio',
+    type: 'website',
+    description:
+      'Descubre el juego urbano de Catch The Alien: crea, esconde y busca aliens reales en tu ciudad.',
+  }}
+>
+  <Navbar />
+  <AlienCard />
+
+  <!-- HERO -->
+  <section
+    class="bg-bg-primary flex min-h-screen flex-col items-center justify-center px-6 text-center"
+  >
+    <p class="text-accent-soft mb-6 font-mono text-[10px] tracking-widest uppercase">
+      Open project — Community driven
+    </p>
+    <h1 class="text-text-primary mb-6 text-5xl font-semibold tracking-tight md:text-6xl">
+      Catch The Alien
+    </h1>
+    <div class="mb-8 space-y-1">
+      <p class="text-text-secondary text-sm">Ya están aquí.</p>
+      <p class="text-text-secondary text-sm">Algunos han sido encontrados.</p>
+      <p class="text-text-secondary text-sm">La mayoría siguen ocultos.</p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-3">
+      <a
+        href="/map"
+        class="text-bg-primary rounded-lg bg-[var(--color-accent-secondary)] px-5 py-2.5 text-sm font-semibold transition-colors duration-150 hover:bg-(--color-accent-primary)"
+      >
+        Explorar mapa
+      </a>
+      <a
+        href="/about"
+        class="text-text-secondary hover:border-accent-soft rounded-lg border border-(--color-border) px-5 py-2.5 text-sm transition-colors duration-150 hover:text-(--color-accent-primary)"
+      >
+        El proyecto
+      </a>
+    </div>
+    <p
+      class="text-text-muted mt-10 font-mono text-[10px] font-black tracking-widest uppercase opacity-50"
+    >
+      {foundCount} encontrados / ???? totales
+    </p>
+  </section>
+
+  <!-- MAPA -->
+  <section id="mapa" class="bg-bg-secondary px-6 py-20">
+    <div class="mx-auto max-w-3xl">
+      <div class="mb-8 text-center">
+        <h2 class="text-text-primary text-2xl font-semibold tracking-tight">Explora tu ciudad</h2>
+        <p class="text-text-muted mt-1 text-sm">Encuentra lo que otros no ven.</p>
+      </div>
+      <div class="h-96 overflow-hidden rounded-xl border border-(--color-border)">
+        <MapEmbed />
+      </div>
+      <div class="mt-4 text-center">
+        <a
+          href="/map"
+          class="text-accent-soft inline-block font-mono text-[10px] tracking-widest uppercase transition-colors duration-150 hover:text-(--color-accent-primary)"
+        >
+          Ver mapa completo →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="bg-bg-primary px-6 py-20">
+    <div class="mx-auto max-w-3xl">
+      <div class="mb-10 text-center">
+        <h2 class="text-text-primary text-2xl font-semibold tracking-tight">¿Cómo funciona?</h2>
+      </div>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div class="bg-bg-secondary overflow-hidden rounded-xl border border-(--color-border)">
+          <div class="px-3 py-3 text-center">
+            <h3>Buscadores/as</h3>
+          </div>
+          {
+            [
+              { step: '01', text: 'Encontrar un alien' },
+              { step: '02', text: 'Reclamarlo con el QR' },
+              { step: '03', text: 'Quédatelo' },
+            ].map((item) => (
+              <div class="flex items-center gap-5 border-b border-(--color-border) px-6 py-5 transition-colors duration-100 last:border-0 hover:bg-(--color-bg-tertiary)">
+                <span class="text-primary shrink-0 font-mono text-sm font-medium">{item.step}</span>
+                <span class="text-text-secondary text-sm">{item.text}</span>
+              </div>
+            ))
+          }
+        </div>
+        <div class="bg-bg-secondary overflow-hidden rounded-xl border border-(--color-border)">
+          <div class="px-3 py-3 text-center">
+            <h3>Creadores/as</h3>
+          </div>
+          {
+            [
+              { step: '01', text: 'Crea un alien' },
+              { step: '02', text: 'Imprime la pieza y pega el QR' },
+              { step: '03', text: 'Escondelo y activalo' },
+            ].map((item) => (
+              <div class="flex items-center gap-5 border-b border-(--color-border) px-6 py-5 transition-colors duration-100 last:border-0 hover:bg-(--color-bg-tertiary)">
+                <span class="text-accent-soft shrink-0 font-mono text-sm font-medium">
+                  {item.step}
+                </span>
+                <span class="text-text-secondary text-sm">{item.text}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPÓSITO -->
+  <section class="bg-bg-secondary px-6 py-20">
+    <div class="mx-auto max-w-3xl">
+      <div
+        class="space-y-2 overflow-hidden rounded-xl border border-(--color-border) bg-(--color-bg-tertiary) px-6 py-6 text-center"
+      >
+        <h2 class="text-text-primary text-2xl font-semibold tracking-tight">No es solo un juego</h2>
+        <p class="text-text-secondary mx-auto max-w-xl text-sm leading-relaxed">
+          Es una forma de redescubrir tu ciudad. De fijarte en lugares que normalmente pasarían
+          desapercibidos. De convertir lo cotidiano en algo inesperado.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMUNIDAD -->
+  <section id="proyecto" class="bg-bg-primary px-6 py-20">
+    <div class="mx-auto max-w-3xl">
+      <div class="mb-10 text-center">
+        <h2 class="text--text-primary text-2xl font-semibold tracking-tight">
+          Un proyecto abierto
+        </h2>
+      </div>
+      <div class="bg-bg-secondary overflow-hidden rounded-xl border border-(--color-border)">
+        <div class="bg-bg-tertiary border-b border-(--color-border) px-5 py-3">
+          <p
+            class="font-mono text-[10px] font-medium tracking-widest text-(--color-accent-primary) uppercase"
+          >
+            Para todos/as
+          </p>
+        </div>
+        <div class="text-text-secondary space-y-4 px-6 py-6 text-sm leading-relaxed">
+          <p>
+            Cualquiera puede crear aliens. Cualquiera puede esconderlos. Cualquiera puede
+            encontrarlos.
+          </p>
+          <p>
+            Los modelos estarán disponibles en repositorios como{' '}
+            <a
+              class="hover:text-accent-soft font-semibold text-(--color-accent-primary)"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://makerworld.com/es/collections/23808625-catch-the-alien">MakerWorld</a
+            >, para que cualquiera pueda imprimirlos y formar parte del juego.
+          </p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4 border-t border-(--color-border) px-6 py-4">
+          <a
+            href="/GuiaCreador"
+            class="border-accent-soft text-accent-secondary hover:border-accent-soft inline-block rounded-lg border px-5 py-2.5 text-sm transition-colors duration-150 hover:text-(--color-accent-primary)"
+          >
+            Guia del creador
+          </a>
+          <a
+            href="/create-alien"
+            class="text-text-secondary hover:border-accent-soft inline-block rounded-lg border border-(--color-border) px-5 py-2.5 text-sm transition-colors duration-150 hover:text-(--color-accent-primary)"
+          >
+            Crea tu propio alien
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="bg-bg-secondary px-6 py-20">
+    <div class="mx-auto max-w-3xl space-y-6 text-center">
+      <p class="text-accent-soft font-mono text-[10px] tracking-widest uppercase">
+        Todavía quedan aliens por descubrir
+      </p>
+      <h2 class="text-text-primary text-3xl font-semibold tracking-tight">Siguen ahí fuera</h2>
+      <a
+        href="/map"
+        class="text-bg-primary inline-block rounded-lg bg-[var(--color-accent-secondary)] px-5 py-2.5 text-sm font-semibold transition-colors duration-150 hover:bg-(--color-accent-primary)"
+      >
+        Abrir mapa
+      </a>
+      <p
+        class="text-text-muted border-t border-(--color-border) pt-4 font-mono text-[10px] tracking-widest uppercase opacity-40"
+      >
+        2026 / A community project by CatchTheAlien
+      </p>
+    </div>
+  </section>
+</Layout>
