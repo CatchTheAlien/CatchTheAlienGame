@@ -18,7 +18,7 @@ import { ALIEN_TYPES } from '@/data/alien_types';
   <Navbar />
 
   <!-- ESPECÍMENES -->
-  <section class="bg-bg-secondary h-screen px-6 py-20">
+  <section class="bg-bg-secondary min-h-screen px-6 py-20">
     <div class="mx-auto max-w-6xl">
       <div class="mb-12 text-center">
         <h2 class="text-text-primary text-2xl font-semibold tracking-tight">Tipos disponibles</h2>
@@ -32,15 +32,19 @@ import { ALIEN_TYPES } from '@/data/alien_types';
         {
           ALIEN_TYPES.map((type) => (
             <div class="group bg-bg-primary overflow-hidden rounded-xl border border-(--color-border) transition-all hover:border-accent-soft hover:shadow-lg">
-              <a class="relative aspect-square overflow-hidden bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px]" href={type.modelUrl}        target="_blank"
-          rel="noopener noreferrer">
+              <div class="rounded-xl border-2 border-gray-100 bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px]">
+              <a class="h-full w-full block"
+  href={type.modelUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+>
                 <img
                   src={`/imgs/aliens/${type.folder}/0005.webp`}
                   alt={`Alien tipo ${type.name}`}
                   class="h-full w-full object-cover transition-transform group-hover:scale-105"
                   loading="lazy"
                 />
-              </a>
+              </a></div>
 
               <div class="p-4">
                 <h3 class="text-text-primary text-lg font-semibold">{type.name}</h3>
