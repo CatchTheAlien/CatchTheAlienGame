@@ -1,0 +1,115 @@
+<div
+  id="alien-card"
+  class="fixed inset-0 z-9999 flex hidden h-screen w-screen flex-col items-center justify-center bg-black/20 p-4 backdrop-blur-sm"
+>
+  <div class="relative mx-auto w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl">
+    <!-- Botón cerrar -->
+    <button
+      id="close-card"
+      class="absolute top-3 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-xl bg-gray-100 text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-800"
+      aria-label="Cerrar"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>
+      </svg>
+    </button>
+
+    <!-- Animación 3D + título -->
+    <div class="flex flex-col items-center gap-4 p-5 pb-4">
+      <!-- Contenedor relativo para la imagen principal -->
+      <div
+        class="relative z-0 h-60 w-60 shrink-0 rounded-xl border-2 border-gray-100 bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px]"
+      >
+        <img
+          id="card-animation"
+          src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+          alt=""
+          width="320"
+          height="320"
+          class="h-full w-full rounded-xl object-cover"
+        />
+      </div>
+      <div id="card-real-image">
+        <img
+          id="card-real-image-im"
+          src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+          alt="Real image"
+          class="object-fit z-9999 h-10 w-10 cursor-pointer rounded-lg border-2 border-white object-cover shadow-md"
+        />
+      </div>
+      <!--
+         <div
+        class="z-0 relative h-60 w-60 shrink-0 rounded-xl border-2 border-gray-100 bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px]"
+      >
+        
+       
+      </div>
+      <div
+        class="z-0 relative h-60 w-60 shrink-0 rounded-xl border-2 border-gray-100 bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px]"
+      >
+ Miniatura PiP (esquina inferior izquierda) — al pulsar abre el viewer 
+        
+     </div> -->
+
+      <div class="flex flex-col items-center gap-1 text-center">
+        <span
+          id="card-type"
+          class="text-accent-soft m-1 text-2xl font-bold"
+          style="font-family: 'Space Mono', monospace"></span>
+        <p id="card-id" class="text-sm font-medium text-gray-400"></p>
+      </div>
+    </div>
+
+    <div class="mx-5 h-px bg-gray-100"></div>
+
+    <!-- Filas de info -->
+    <div class="space-y-3 px-5 py-3">
+      <div class="flex items-center gap-3">
+        <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gray-100">
+          <img src="/svg/target-arrow.svg" alt="Breaking Borders Logo" height="14" width="14" />
+        </div>
+        <p id="card-drop" class="mb-0 text-sm leading-none text-gray-500"></p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gray-100">
+          <img src="/svg/trophy.svg" alt="Breaking Borders Logo" height="14" width="14" />
+        </div>
+        <p id="card-claim" class="mb-0 text-sm leading-none text-gray-500"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Viewer de imagen en grande — FUERA del #alien-card para evitar propagación de eventos -->
+<div
+  id="card-image-viewer"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4"
+>
+  <button
+    id="card-image-viewer-close"
+    class="absolute top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-black transition hover:bg-white"
+    aria-label="Cerrar vista de imagen"
+  >
+    ✕
+  </button>
+  <img
+    id="card-image-viewer-img"
+    src=""
+    alt="Imagen del alien en grande"
+    class="max-h-[90vh] max-w-[90vw] rounded-xl border border-white object-contain shadow-2xl"
+  />
+</div>
+
+<script type="module">
+  // AlienCard scripts removed - name field eliminated
+</script>

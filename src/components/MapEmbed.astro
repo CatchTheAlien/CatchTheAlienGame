@@ -1,0 +1,55 @@
+---
+// src/components/MapEmbed.astro
+// Componente reutilizable — úsalo en index.astro y en map.astro
+
+import 'leaflet/dist/leaflet.css';
+
+import { getMarkers } from '@/lib/db';
+const aliendata = await getMarkers();
+const markersJson = JSON.stringify(aliendata);
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<!-- TODO: Conseguir que el mapa tenga la ubicación en la ultima posición de un alien que haya en la base de datos -->
+<div id="map-embed" class={`w-full h-full min-h-[inherit] rounded-xl overflow-hidden ${className}`}>
+</div>
+
+<script define:vars={{ markersJson }}>
+  window.__ALIEN_DATA__ = JSON.parse(markersJson);
+</script>
+
+<script>
+  import L from 'leaflet';
+
+  const map = L.map('map-embed').setView([43.263, -2.935], 13);
+  map.zoomControl.remove();
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors © CARTO',
+  }).addTo(map);
+
+  const aliens = window.__ALIEN_DATA__;
+
+  aliens.forEach((alien: Record<string, any>) => {
+    const { lat, lng } = alien.location;
+    const markerClass = alien.claim ? 'invisible-marker claimed' : 'invisible-marker unclaimed';
+
+    const marker = L.marker([lat, lng], {
+      icon: L.divIcon({
+        html: '<img src="/svg/Alien.svg" style="width:25px; height:25px;">',
+        className: markerClass,
+        iconSize: [25, 25],
+        iconAnchor: [12.5, 25],
+      }),
+    }).addTo(map);
+
+    marker.on('click', () => {
+      window.location.href = '/map';
+    });
+  });
+</script>

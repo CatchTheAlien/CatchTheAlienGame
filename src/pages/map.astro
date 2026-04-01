@@ -1,0 +1,193 @@
+---
+import Layout from '../layouts/Layout.astro';
+import 'leaflet/dist/leaflet.css';
+import Navbar from '../components/Navbar.astro';
+import AlienCard from '../components/AlienCard.astro';
+
+import { getMarkers } from '@/lib/db';
+const aliendata = await getMarkers();
+const markersJson = JSON.stringify(aliendata);
+---
+
+<Layout
+  title="Mapa de Aliens | CatchTheAlien"
+  description="Consulta el mapa activo con todos los aliens ocultos y reclamados en tu ciudad."
+  canonical={`${import.meta.env.SITE || import.meta.env.PUBLIC_SITE_URL || 'https://catchthealien.example'}/map`}
+  image="/imgs/aliens/realimages/map.jpg"
+  openGraph={{
+    title: 'Mapa de Aliens - Catch The Alien',
+    type: 'website',
+    description:
+      'Visualiza la ubicación de aliens ocultos en el mapa interactivo y encuentra nuevas misiones.',
+  }}
+>
+  <Navbar />
+  <AlienCard />
+  <div id="map" class="min-h-screen"></div>
+
+  <!-- Botón de localización -->
+  <button id="locate-btn" title="Mi ubicación" aria-label="Mostrar mi ubicación en el mapa">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      ><path stroke="none" d="M0 0h24v24H0z"></path><path d="M9 12a3 3 0 1 0 6 0 3 3 0 1 0-6 0"
+      ></path><path d="M4 12a8 8 0 1 0 16 0 8 8 0 1 0-16 0m8-10v2m0 16v2m8-10h2M2 12h2"></path></svg
+    >
+  </button>
+
+  <style>
+    #locate-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.25rem;
+      z-index: 1000;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid rgba(0, 0, 0, 0.12);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #3b82f6;
+      transition:
+        background 0.2s,
+        box-shadow 0.2s,
+        color 0.2s;
+    }
+    #locate-btn:hover {
+      background: #eff6ff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+    }
+    #locate-btn.active {
+      background: #3b82f6;
+      color: #fff;
+      border-color: #2563eb;
+    }
+  </style>
+
+  <script define:vars={{ markersJson }}>
+    window.__ALIEN_DATA__ = JSON.parse(markersJson);
+  </script>
+
+  <script>
+    import L from 'leaflet';
+
+    const map = L.map('map').setView([43.263, -2.935], 13);
+    map.zoomControl.remove();
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors © CARTO',
+    }).addTo(map);
+
+    const aliens = window.__ALIEN_DATA__;
+    const urlParams = new URLSearchParams(window.location.search);
+    const highlightId = urlParams.get('highlight');
+
+    // Módulo de la tarjeta: se importa LAZY en el primer click
+    let cardModule: typeof import('../utils/alien-card') | null = null;
+
+    aliens.forEach((alien: Record<string, any>) => {
+      const { lat, lng } = alien.location;
+      const markerClass =
+        alien.status === 'found' ? 'invisible-marker claimed' : 'invisible-marker unclaimed';
+      const marker = L.marker([lat, lng], {
+        icon: L.divIcon({
+          html: '<img src="/svg/Alien.svg" style="width:25px; height:25px;">',
+          className: markerClass,
+          iconSize: [25, 25],
+          iconAnchor: [12.5, 25],
+        }),
+      }).addTo(map);
+
+      // Highlight marker if it's the one from URL
+      if (alien.id === highlightId) {
+        marker.openPopup();
+        map.setView([lat, lng], 16);
+      }
+
+      marker.on('click', async () => {
+        if (!cardModule) {
+          cardModule = await import('../utils/alien-card');
+        }
+        cardModule.displayAlienInfo(alien);
+      });
+    });
+
+    // ── Geolocalización ──────────────────────────────────────────────────────
+    const locateBtn = document.getElementById('locate-btn') as HTMLButtonElement;
+    let userMarker: L.CircleMarker | null = null;
+    let userAccuracyCircle: L.Circle | null = null;
+    let isTracking = false;
+
+    locateBtn.addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        alert('Tu navegador no soporta geolocalización.');
+        return;
+      }
+
+      if (isTracking) {
+        // Desactivar seguimiento
+        isTracking = false;
+        locateBtn.classList.remove('active');
+        userMarker?.remove();
+        userAccuracyCircle?.remove();
+        userMarker = null;
+        userAccuracyCircle = null;
+        return;
+      }
+
+      isTracking = true;
+      locateBtn.classList.add('active');
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { latitude, longitude, accuracy } = pos.coords;
+
+          // Eliminar marcadores previos si los hubiera
+          userMarker?.remove();
+          userAccuracyCircle?.remove();
+
+          // Círculo de precisión
+          userAccuracyCircle = L.circle([latitude, longitude], {
+            radius: accuracy,
+            color: '#3b82f6',
+            fillColor: '#93c5fd',
+            fillOpacity: 0.2,
+            weight: 1,
+          }).addTo(map);
+
+          // Punto azul de posición
+          userMarker = L.circleMarker([latitude, longitude], {
+            radius: 8,
+            color: '#fff',
+            fillColor: '#3b82f6',
+            fillOpacity: 1,
+            weight: 3,
+          }).addTo(map);
+
+          map.setView([latitude, longitude], 16);
+        },
+        (err) => {
+          isTracking = false;
+          locateBtn.classList.remove('active');
+          console.error('Error de geolocalización:', err.message);
+          if (err.code === err.PERMISSION_DENIED) {
+            alert('Permiso de ubicación denegado. Actívalo en la configuración de tu navegador.');
+          } else {
+            alert('No se pudo obtener tu ubicación. Inténtalo de nuevo.');
+          }
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    });
+  </script>
+</Layout>

@@ -1,0 +1,45 @@
+---
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout
+  title="404 - Página no encontrada | CatchTheAlien"
+  description="La página solicitada no existe. Vuelve al inicio para seguir buscando aliens en el mapa."
+  canonical={`${import.meta.env.SITE || import.meta.env.PUBLIC_SITE_URL || 'https://catchthealien.example'}/404`}
+  image="/imgs/aliens/realimages/404.jpg"
+  openGraph={{
+    title: 'Signal Lost | CatchTheAlien',
+    type: 'website',
+    description:
+      'This alien seems to have escaped detection. Return to the map and keep searching.',
+  }}
+>
+  <section class="bg-bg-primary flex min-h-screen items-center justify-center px-4 py-16">
+    <div class="mx-auto max-w-md space-y-6 text-center">
+      <!-- Error code -->
+      <p class="text-accent-soft font-mono text-[10px] tracking-widest uppercase">
+        Error 404 — Unknown location
+      </p>
+
+      <!-- Title -->
+      <div class="space-y-2">
+        <h1 class="text-text-primary text-3xl font-semibold tracking-tight">Signal lost</h1>
+        <p class="text-text-secondary text-sm">This alien is no longer on the radar.</p>
+        <p class="text-text-muted text-xs">It might have moved… or never existed.</p>
+      </div>
+
+      <!-- CTA -->
+      <a
+        href="/"
+        class="text-bg-primary inline-block rounded-lg bg-[var(--color-accent-secondary)] px-5 py-2.5 text-sm font-semibold transition-colors duration-150 hover:bg-(--color-accent-primary)"
+      >
+        Return to base
+      </a>
+
+      <!-- Footer line -->
+      <p class="text-text-muted font-mono text-[10px] tracking-wide opacity-40">
+        Keep searching. They are still out there.
+      </p>
+    </div>
+  </section>
+</Layout>
