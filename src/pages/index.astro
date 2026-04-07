@@ -6,7 +6,9 @@ import MapEmbed from '@/components/MapEmbed.astro';
 import { getFoundCount, getTotalFoundCount } from '@/lib/db';
 
 const foundCount = await getFoundCount();
-const totalCount = await getTotalFoundCount();
+
+export const prerender = false;
+
 ---
 
 <Layout

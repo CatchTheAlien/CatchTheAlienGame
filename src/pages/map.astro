@@ -7,6 +7,8 @@ import AlienCard from '../components/AlienCard.astro';
 import { getMarkers } from '@/lib/db';
 const aliendata = await getMarkers();
 const markersJson = JSON.stringify(aliendata);
+export const prerender = false;
+
 ---
 
 <Layout
