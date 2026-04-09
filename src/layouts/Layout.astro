@@ -5,6 +5,10 @@ import '@fontsource/space-mono';
 
 import SEO from '@/components/SEO.astro';
 import type { Preload } from '@/types/Preload';
+import Analytics from '@vercel/analytics/astro'
+import SpeedInsights from "@vercel/speed-insights/astro"
+
+
 
 interface Props {
   title: string;
@@ -28,6 +32,8 @@ const pageCanonical = canonical || siteBaseUrl;
 
 <!-- TODO: Añadir preload para no tener saltos de carga de fuente --><!doctype html>
 <html lang="es">
+  
+
   <head>
     <SEO
       title={title}
@@ -38,6 +44,8 @@ const pageCanonical = canonical || siteBaseUrl;
       openGraph={openGraph}
     />
   </head>
+  <Analytics/>
+  <SpeedInsights/>
   <body class="min-h-screen bg-white">
     <slot />
   </body>
