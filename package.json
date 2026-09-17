@@ -14,6 +14,7 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+<<<<<<< HEAD
     "@astrojs/vercel": "^10.0.8",
     "@fontsource/inter": "^5.3.0",
     "@fontsource/space-mono": "^5.3.0",
@@ -29,5 +30,24 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.4",
     "tsx": "^4.23.13"
+=======
+    "@astrojs/vercel": "^10.0.4",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/space-mono": "^5.2.9",
+    "@libsql/client": "^0.17.2",
+    "@tailwindcss/vite": "^4.2.2",
+    "@vercel/analytics": "2.0.1",
+    "@vercel/speed-insights": "2.0.0",
+    "astro": "^6.1.3",
+    "leaflet": "^1.9.4",
+    "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.21",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "tsx": "^4.21.0"
+>>>>>>> 94f225c23634511c4153c2c4db1a8738e47b901c
   }
 }
