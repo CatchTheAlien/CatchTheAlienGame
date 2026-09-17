@@ -7,6 +7,9 @@ import AlienCard from '../components/AlienCard.astro';
 import { getMarkers } from '@/lib/db';
 const aliendata = await getMarkers();
 const markersJson = JSON.stringify(aliendata);
+
+const cartoApiKey = import.meta.env.VITE_CARTO_API_KEY;
+
 ---
 
 <Layout
@@ -81,12 +84,18 @@ const markersJson = JSON.stringify(aliendata);
 
   <script>
     import L from 'leaflet';
+  const cartoApiKey = import.meta.env.PUBLIC_CARTO_API_KEY;
 
     const map = L.map('map').setView([43.263, -2.935], 13);
     map.zoomControl.remove();
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
+    L.tileLayer(
+    `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=${cartoApiKey}`,
+    {
       attribution: '© OpenStreetMap contributors © CARTO',
-    }).addTo(map);
+      subdomains: 'abcd',
+      maxZoom: 20
+    }
+    ).addTo(map);
 
     const aliens = window.__ALIEN_DATA__;
     const urlParams = new URLSearchParams(window.location.search);

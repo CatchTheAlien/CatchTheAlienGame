@@ -26,18 +26,32 @@ const { class: className = '' } = Astro.props;
 <script>
   import L from 'leaflet';
 
+  const cartoApiKey = import.meta.env.PUBLIC_CARTO_API_KEY;
+
+  console.log('ENV:', import.meta.env);
+  console.log('CARTO KEY:', cartoApiKey);
+
   const map = L.map('map-embed').setView([43.263, -2.935], 13);
+
   map.zoomControl.remove();
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors © CARTO',
-  }).addTo(map);
+  L.tileLayer(
+    `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=${cartoApiKey}`,
+    {
+      attribution: '© OpenStreetMap contributors © CARTO',
+      subdomains: 'abcd',
+      maxZoom: 20
+    }
+  ).addTo(map);
 
   const aliens = window.__ALIEN_DATA__;
 
   aliens.forEach((alien: Record<string, any>) => {
     const { lat, lng } = alien.location;
-    const markerClass = alien.claim ? 'invisible-marker claimed' : 'invisible-marker unclaimed';
+
+    const markerClass = alien.claim
+      ? 'invisible-marker claimed'
+      : 'invisible-marker unclaimed';
 
     const marker = L.marker([lat, lng], {
       icon: L.divIcon({

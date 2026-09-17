@@ -7,30 +7,30 @@ export type AlienType = {
 
 export const ALIEN_TYPES: AlienType[] = [
   {
-    name: 'Loomer',
+    name: 'Largo',
     slug: 'loomer',
     folder: 'loomer',
     modelUrl: 'https://makerworld.com/es/models/749527-little-alien-visitors#profileId-683012',
   },
   {
-    name: 'Squib',
+    name: 'Chiquitín',
     slug: 'squib',
     folder: 'squib',
     modelUrl: 'https://makerworld.com/es/models/749527-little-alien-visitors#profileId-683012',
   },
   {
-    name: 'Slug',
+    name: 'Babosa',
     slug: 'slug',
     folder: 'slug',
   },
   {
-    name: 'Greeter',
+    name: 'Saludos Terricolas',
     slug: 'greeter',
     folder: 'greeter',
     modelUrl: 'https://makerworld.com/es/models/749527-little-alien-visitors#profileId-683012',
   },
   {
-    name: 'Watcher',
+    name: 'Chill',
     slug: 'watcher',
     folder: 'watcher',
     modelUrl: 'https://makerworld.com/es/models/2601876-sitted-cute-alien#profileId-2870960',

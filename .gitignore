@@ -25,3 +25,4 @@ pnpm-debug.log*
 local.db
 scripts/seed.ts
 .vercel
+.env.local
